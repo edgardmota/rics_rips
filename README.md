@@ -1,2 +1,4 @@
 # rics_rips
-An implementation of RICS_RIPS Algorithm in MoonScript.
+An implementation of RICs_RIPs Algorithm in MoonScript. The RICs_RIPs Algorithm is a brilliant aproach to generate unrestricted and restricted integer compositions and integer partitions. 
+
+It was proposed by John Douglas Opdyke on his papper "A Unified Approach to Algorithms Generating Unrestricted and Restricted Integer Compositions and Integer Partitions" (full text at http://bit.ly/1Mmgqg9).
