@@ -8,11 +8,11 @@ class RestrictedCompPart
 		@maxk = maxk
 		@a = a
 		@b = b
-	print_cell: (cell) =>
-		str = ""
+	fill_cells: (cell) =>
+		aux = {}
 		for item in *cell
-			str = "#{str}#{item} "
-		print "#{str}"
+			table.insert aux, item
+		table.insert @cells, aux
 	node2node: (comp_part,i,row,col,level,cum_sum_parts,a) =>
 		cell = {}
 		for i = 1, level + 1
@@ -26,7 +26,7 @@ class RestrictedCompPart
 				for j = low, high
 					cell[i - 1] = j
 					cell[i] = @n - cum_sum_parts - j
-					@print_cell cell
+					@fill_cells cell
 			else
 				cell[level + 1] = a
 				cum_sum_parts_temp = cum_sum_parts + a
@@ -45,7 +45,7 @@ class RestrictedCompPart
 							q = math.min @b - a, (row - a) - (col - 1)
 							@node2node comp_part, i,row - a + 1 - q2, col - 1, level + 1, cum_sum_parts_temp, a
 		else
-			print @n
+			@fill_cells {@n}
 		if (level > 0) and row > 1
 			cell[level] += 1
 			if comp_part
@@ -72,9 +72,11 @@ class RestrictedCompPart
 						@node2node comp_part, i,row - p2, col, level, cum_sum_parts, a
 	rics_rips: (comp_part) =>
 		rowdec = 0
+		@cells = {}
 		for i = @mink, @maxk
 			if @a != 1
 				rowdec = i
 			aux = (@n/i)
 			if (@a <= aux) and (aux <= @b)
 				@node2node comp_part, i, @n - 1 - rowdec, i - 1, 0, 0, @a
+		return @cells
