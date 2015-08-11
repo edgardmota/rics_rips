@@ -1,3 +1,6 @@
+module "RestrictedCompPart", package.seeall
+export RestrictedCompPart
+
 class RestrictedCompPart
 	new: (n,mink,maxk,a,b) =>
 		@n = n
@@ -5,7 +8,7 @@ class RestrictedCompPart
 		@maxk = maxk
 		@a = a
 		@b = b
-	print_cell: (cell,level,row) =>
+	print_cell: (cell) =>
 		str = ""
 		for item in *cell
 			str = "#{str}#{item} "
@@ -23,7 +26,7 @@ class RestrictedCompPart
 				for j = low, high
 					cell[i - 1] = j
 					cell[i] = @n - cum_sum_parts - j
-					@print_cell cell, level, row
+					@print_cell cell
 			else
 				cell[level + 1] = a
 				cum_sum_parts_temp = cum_sum_parts + a
